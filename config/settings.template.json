@@ -1,0 +1,61 @@
+{
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [],
+    "defaultMode": "bypassPermissions"
+  },
+  "model": "sonnet",
+  "defaultModel": "opus",
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/session-journal.sh",
+            "timeout": 30,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/init-project.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat .claude/session-journal.md 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/git-safety.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {},
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true
+}
