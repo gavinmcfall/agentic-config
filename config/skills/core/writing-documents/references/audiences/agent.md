@@ -228,6 +228,25 @@ Structured for finding specific facts later. Consistent patterns: tables, capsul
 **End (Synthesis)**
 Leverage RecencyEffect. How pieces fit together, meta-observations, checklists for actions, bullet points for emphasis, explicit boundaries.
 
+## Capsule: TokenEconomics
+
+**Invariant**
+Every token must earn its place. Context windows are finite budgets — spend wisely.
+
+**Example**
+CamelCase names (`CircuitBreaker`) tokenize as 1-2 tokens. Hyphenated names (`circuit-breaker`) tokenize as 3-5+. Over a document, this compounds.
+//BOUNDARY: Token efficiency is not minimalism. Clarity always wins over brevity.
+
+**Depth**
+- CamelCase for concept names: fewer tokens, better retrieval
+- Skip decorative formatting: emojis, elaborate ASCII, horizontal rules between every section
+- Omit hedging phrases: "It's worth noting that..." costs tokens to say nothing
+- Front-load high-value content: if context is truncated, essential information survives
+- Use structure (tables, bullets) over prose: same information, fewer tokens
+- The cost isn't just reading — it's opportunity cost of what else could fit in the window
+
+---
+
 ## What Hinders Agents
 
 | Pattern | Problem |
