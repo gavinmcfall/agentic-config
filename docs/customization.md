@@ -36,7 +36,29 @@ Three hooks are included:
 - **init-project.sh**: Creates `.claude/` directory and session journal on session start. Generally no changes needed.
 - **session-journal.sh**: Manages the session journal on compaction. Adjust line limits if needed.
 
-### 5. Skills
+### 5. Output Styles
+
+Output styles live in `~/.claude/output-styles/` and shape how Claude behaves in specific contexts. The included `thinking-partner.md` defines a reasoning-first approach.
+
+You can create additional output styles for different work modes — e.g., a "teacher" style that explains everything, a "terse" style for rapid iteration, or a project-specific style.
+
+### 6. Custom Agents
+
+Custom agents live in `~/.claude/agents/` and define specialized agent behaviors with specific tools and constraints. The included `researcher.md` defines an evidence-first research agent with citation requirements.
+
+Create your own agents for repeated workflows — e.g., a "reviewer" agent for code review, a "deployer" agent for infrastructure tasks.
+
+### 7. AGENTS.md Symlink
+
+For multi-tool compatibility, create an `AGENTS.md` symlink in your project root pointing to your `CLAUDE.md`:
+
+```bash
+ln -s CLAUDE.md AGENTS.md
+```
+
+This ensures both Claude Code (which reads `CLAUDE.md`) and other agent frameworks (which may look for `AGENTS.md`) find your project instructions.
+
+### 8. Skills
 
 Each skill lives in `~/.claude/skills/<name>/SKILL.md`. You can:
 - Edit any skill's content to match your terminology and workflow

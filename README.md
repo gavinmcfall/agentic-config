@@ -35,7 +35,7 @@ The installer will:
 
 ## What's Included
 
-**26 skills** across 4 tiers, **3 hooks**, **2 rule files**, and a pre-configured settings template.
+**26 skills** across 4 tiers, **3 hooks**, **2 rule files**, **1 output style**, **1 custom agent**, an **Ethos** document, and a pre-configured settings template.
 
 ### Hooks
 
@@ -61,6 +61,25 @@ The `settings.template.json` provides:
 - Always-thinking mode enabled
 - Empty permissions array (builds up as you use Claude Code)
 
+### Ethos
+
+A layered priority system that guides all agent behavior:
+1. **Hard Rules** — never violate (VerifiedOnly, OmitWhenUncertain, NoSecrets)
+2. **Guidance** — follow unless you have good reason (TemporalStability, ShapeNotDetail, WhyNotWhat, PatternsNotInstances)
+3. **Values** — understand why (BridgingSilos, TrailsNotDestinations, NonObviousTruths)
+
+### Output Styles
+
+| Style | Purpose |
+|-------|---------|
+| `thinking-partner.md` | Reasoning partner mode — gestalt over encyclopedia, cite sources, acknowledge gaps |
+
+### Custom Agents
+
+| Agent | Purpose |
+|-------|---------|
+| `researcher.md` | Evidence-first research with citation requirements and confidence tiers |
+
 ---
 
 ## Skills
@@ -78,7 +97,7 @@ These are universally useful regardless of what you're building.
 | `review-responder` | Process and respond to code review feedback. Use after receiving PR comments from GitHub, feedback from disconnected-... |
 | `skill-builder` | This skill guides intentional skill design. Use when creating, improving, or reviewing Claude Code skills. Requires a... |
 | `using-skills` | Check and invoke available skills before starting work. Invoke at the start of any task to ensure relevant skills are... |
-| `writing-documents` | Guides effective documentation creation. Activates relevant guidance for gestalt, reference, research, design, plan, ... |
+| `writing-documents` | Guides effective documentation creation. Activates relevant guidance for north-star, gestalt, reference, research, de... |
 
 ### Game Dev (14 skills) — Optional
 
@@ -117,7 +136,7 @@ Skeleton skills for deeply personal customization. These provide the structure a
 
 | Skill | Description |
 |-------|-------------|
-| `inner-ally` | Deeply personal mentor and guide. Use when struggling, wanting to quit, feeling overwhelmed, or doubting yourself. Works best if you feed it a high quality personality profile of yourself from something like [Vark](https://vark-learn.com/), [Truity](https://www.truity.com/), [16 Personalities](https://www.16personalities.com/), [Gyfted](https://www.gyfted.me/all-tests), etc  |
+| `inner-ally` | Deeply personal mentor and guide. Use when struggling, wanting to quit, feeling overwhelmed, or doubting yourself. Em... |
 
 ---
 

@@ -150,10 +150,16 @@ fi
 
 echo ""
 
-# --- Install CLAUDE.md ---
+# --- Install CLAUDE.md and Ethos ---
 info "Installing CLAUDE.md (global instructions)..."
 do_copy "${CONFIG_SRC}/CLAUDE.md" "${CLAUDE_DIR}/CLAUDE.md"
 ok "CLAUDE.md installed"
+
+if [[ -f "${CONFIG_SRC}/Ethos.md" ]]; then
+  info "Installing Ethos.md (principles and values)..."
+  do_copy "${CONFIG_SRC}/Ethos.md" "${CLAUDE_DIR}/Ethos.md"
+  ok "Ethos.md installed"
+fi
 
 # --- Install settings ---
 info "Installing settings template..."
@@ -204,6 +210,32 @@ for hook_file in "${CONFIG_SRC}/hooks"/*.sh; do
   fi
 done
 ok "Hooks installed (executable)"
+
+# --- Install output styles ---
+if [[ -d "${CONFIG_SRC}/output-styles" ]]; then
+  info "Installing output styles..."
+  if ! $DRY_RUN; then
+    mkdir -p "${CLAUDE_DIR}/output-styles"
+  fi
+  for style_file in "${CONFIG_SRC}/output-styles"/*.md; do
+    [[ ! -f "$style_file" ]] && continue
+    do_copy "$style_file" "${CLAUDE_DIR}/output-styles/$(basename "$style_file")"
+  done
+  ok "Output styles installed"
+fi
+
+# --- Install custom agents ---
+if [[ -d "${CONFIG_SRC}/agents" ]]; then
+  info "Installing custom agents..."
+  if ! $DRY_RUN; then
+    mkdir -p "${CLAUDE_DIR}/agents"
+  fi
+  for agent_file in "${CONFIG_SRC}/agents"/*.md; do
+    [[ ! -f "$agent_file" ]] && continue
+    do_copy "$agent_file" "${CLAUDE_DIR}/agents/$(basename "$agent_file")"
+  done
+  ok "Custom agents installed"
+fi
 
 # --- Install skills by tier ---
 echo ""

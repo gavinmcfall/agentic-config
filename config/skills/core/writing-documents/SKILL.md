@@ -1,6 +1,6 @@
 ---
 name: writing-documents
-description: Guides effective documentation creation. Activates relevant guidance for gestalt, reference, research, design, plan, flow, findings, concepts, or process documents. Prevents cascading harm from wrong information.
+description: Guides effective documentation creation. Activates relevant guidance for north-star, gestalt, reference, research, design, plan, flow, findings, concepts, or process documents. Prevents cascading harm from wrong information.
 tags: [documentation, writing, skill, quality]
 zones: { constraint: 40, knowledge: 30, wisdom: 25, process: 5 }
 ---
@@ -15,6 +15,7 @@ Wrong information is worse than missing information. One fabricated fact becomes
 
 | If the reader wants to... | Write a... | Key insight |
 |---------------------------|------------|-------------|
+| Know what great looks like | **north-star** | Testable outcome declarations, not features |
 | Understand something | **gestalt** | Essential essence, not everything |
 | Look something up | **reference** | Data in CSV, guidance in markdown |
 | Inform a decision | **research** | Synthesis without prescription |
@@ -38,7 +39,7 @@ Each type has guidance in `references/{type}/`. Read it before writing.
 description: One sentence - what this is and why it exists
 tags: [searchable, terms]
 audience: { human: 60, agent: 40 }
-purpose: { gestalt: 0, reference: 0, research: 0, design: 0, plan: 0, flow: 0, findings: 0, concepts: 0, high-agency-process: 0, low-agency-process: 0 }
+purpose: { north-star: 0, gestalt: 0, reference: 0, research: 0, design: 0, plan: 0, flow: 0, findings: 0, concepts: 0, high-agency-process: 0, low-agency-process: 0 }
 ---
 ```
 
@@ -118,6 +119,13 @@ Mark gaps honestly: `**STUB** - needs expert input`
 ---
 
 ## Purpose Guidance
+
+### North Star
+**Declare what great looks like. Testable outcomes, not features.**
+
+Written from the user's perspective in statements an agent can verify. Not architecture, not implementation — outcomes. Each declaration should be checkable as yes/no against a running system.
+
+→ `references/north-star/north-star.md`
 
 ### Gestalt
 **Re-hydrate understanding. Enable good instincts.**
@@ -209,6 +217,7 @@ flowchart LR
 
 | Document | Feeds into | When to use |
 |----------|------------|-------------|
+| north-star | flow, design | Declaring what great looks like for a feature area |
 | research | flow, design, *ambient knowledge* | Exploring options, building domain expertise |
 | flow | design | Mapping processes |
 | concepts | design | Crystallizing wisdom |
