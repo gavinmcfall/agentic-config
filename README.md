@@ -35,7 +35,7 @@ The installer will:
 
 ## What's Included
 
-**26 skills** across 4 tiers, **3 hooks**, **2 rule files**, **1 output style**, **1 custom agent**, an **Ethos** document, and a pre-configured settings template.
+**26 skills** across 4 tiers, **3 hooks**, **2 rule files**, and a pre-configured settings template.
 
 ### Hooks
 
@@ -60,25 +60,6 @@ The `settings.template.json` provides:
 - Environment variables for experimental features (tool search, agent teams)
 - Always-thinking mode enabled
 - Empty permissions array (builds up as you use Claude Code)
-
-### Ethos
-
-A layered priority system that guides all agent behavior:
-1. **Hard Rules** — never violate (VerifiedOnly, OmitWhenUncertain, NoSecrets)
-2. **Guidance** — follow unless you have good reason (TemporalStability, ShapeNotDetail, WhyNotWhat, PatternsNotInstances)
-3. **Values** — understand why (BridgingSilos, TrailsNotDestinations, NonObviousTruths)
-
-### Output Styles
-
-| Style | Purpose |
-|-------|---------|
-| `thinking-partner.md` | Reasoning partner mode — gestalt over encyclopedia, cite sources, acknowledge gaps |
-
-### Custom Agents
-
-| Agent | Purpose |
-|-------|---------|
-| `researcher.md` | Evidence-first research with citation requirements and confidence tiers |
 
 ---
 
