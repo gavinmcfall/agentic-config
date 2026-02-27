@@ -13,6 +13,8 @@
 | `research` | Evidence-first investigation | Gathering information for decisions |
 | `mermaid-diagrams` | Effective diagrams | Creating diagrams in markdown documents |
 | `skill-builder` | Skill creation | Creating or improving Claude Code skills |
+| `domain-expert` | Domain name evaluation | Brainstorming, checking availability, choosing registrars |
+| `config-packager` | Package config for distribution | Updating agentic-config repo, auditing for PII, packaging skills |
 
 ## Game Dev Skills (Custom Suite)
 
@@ -87,3 +89,4 @@ automation need → n8n-workflow-builder
 **Testing with people?** `playtest-coordinator`
 **Cluster work?** `k8s-operator` or `home-ops-deployer`
 **Automate something?** `n8n-workflow-builder`
+**Package config for sharing?** `config-packager`
