@@ -5,7 +5,7 @@ description: Check and invoke available skills before starting work. Invoke at t
 
 # Using Skills
 
-Before starting any task, check your available skills. Skills encode proven practices—ignoring them means reinventing wheels or missing important patterns.
+Before starting any task, check your available skills. Skills encode proven practices — ignoring them means reinventing wheels or missing important patterns.
 
 ## Process
 
@@ -20,27 +20,73 @@ If there's even a small chance a skill applies, invoke it. The cost of loading a
 
 Skills compose. One skill may tell you to invoke another.
 
-## Available Skills Quick Reference
+## Skill Groups
+
+### Core Skills (Always Available)
 
 | Skill | Use When |
 |-------|----------|
+| `using-skills` | Start of any task |
 | `writing-documents` | Writing any documentation, READMEs, designs, plans |
-| `code-review` | Reviewing code with fresh eyes, generating multi-AI review prompts |
+| `code-review` | Reviewing PRs, commits, staged changes, auditing code |
 | `review-responder` | Processing and responding to code review feedback |
 | `research` | Gathering evidence for decisions, investigation tasks |
 | `mermaid-diagrams` | Creating diagrams in markdown documents |
 | `skill-builder` | Creating or improving Claude Code skills |
+| `domain-expert` | Brainstorming, checking availability, choosing registrars |
+| `config-packager` | Updating agentic-config repo, auditing for PII, packaging skills |
+| `red-team` | Testing code, services, or infrastructure for vulnerabilities |
+
+### Game Dev → `game-dev`
+
+Parent router for 14 sub-skills covering the full game dev lifecycle. Invoke `game-dev` to find the right sub-skill.
+
+Sub-skills: `session-planner`, `sprint-manager`, `scope-guardian`, `decision-journal`, `learning-planner`, `boot-dev-companion`, `gdd-writer`, `prototype-coach`, `game-research`, `art-pipeline`, `sound-designer`, `steam-publisher`, `playtest-coordinator`, `plane`
+
+### Wellbeing → `wellbeing`
+
+Personal support for ADHD, emotional regulation, and self-doubt. Invoke `wellbeing` to route to the right help.
+
+Sub-skills: `adhd-coach`, `inner-ally`
+
+### Infrastructure → `infrastructure`
+
+Homelab cluster operations, deployments, and automation. Invoke `infrastructure` to route to the right tool.
+
+Sub-skills: `home-ops-deployer`, `k8s-operator`, `n8n-workflow-builder`
 
 ## Skill Composition Patterns
 
 ```
 task → using-skills → identify relevant skills → invoke them → work
 
+game dev work → game-dev → (routes to sub-skill)
+struggling / stuck → wellbeing → adhd-coach or inner-ally
+cluster / deploy → infrastructure → (routes to sub-skill)
+
 writing task → writing-documents → [document type guidance]
-code review → disconnected-code-review → writing-documents (for findings)
+code review → code-review → writing-documents (for findings)
 review feedback → review-responder → apply/skip each item
 new skill → skill-builder → writing-documents (skills are agent docs)
+research → research → writing-documents (for synthesis)
+security testing → red-team → review-responder (for remediation)
 ```
+
+## Quick "What Do I Invoke?"
+
+| Situation | Invoke |
+|-----------|--------|
+| Starting game dev work | `game-dev` |
+| Can't start / stuck / ADHD | `wellbeing` |
+| Emotionally overwhelmed | `wellbeing` |
+| Cluster / deploy / automation | `infrastructure` |
+| Writing docs | `writing-documents` |
+| Code review | `code-review` |
+| Making a big decision | `game-dev` → `decision-journal` |
+| Security testing | `red-team` |
+| Packaging config | `config-packager` |
+| Domain names | `domain-expert` |
+| New skill | `skill-builder` |
 
 ---
 

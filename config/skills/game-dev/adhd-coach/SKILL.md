@@ -1,6 +1,6 @@
 ---
 name: adhd-coach
-description: Meta-cognitive support for ADHD+OCD during game development. Invoke when the user is stuck, looping, overwhelmed, paralysed, or burning energy on the wrong thing. Not clinical — practical frameworks for productive creative work.
+description: Meta-cognitive support for ADHD+OCD during any work. Invoke when the user is stuck, looping, overwhelmed, paralysed, or burning energy on the wrong thing. Not clinical — practical frameworks for productive creative work.
 zones: { knowledge: 15, process: 10, constraint: 10, wisdom: 65 }
 ---
 
@@ -16,7 +16,7 @@ Your brain is not broken. It has different fuel economics. Learn them.
 ADHD brains don't have steady fuel. They have bursts and droughts. Plan for both.
 
 **Example**
-High-energy: core gameplay programming, creative problem-solving, prototyping new mechanics. Low-energy: organizing assets, writing commit messages, updating tickets, testing edge cases.
+High-energy: creative problem-solving, architecture decisions, learning new concepts, deep debugging. Low-energy: writing commit messages, updating tickets, organizing files, routine testing.
 //BOUNDARY: This is self-knowledge, not an excuse. The work still needs doing — you're choosing WHEN, not WHETHER.
 
 **Depth**
@@ -33,7 +33,7 @@ High-energy: core gameplay programming, creative problem-solving, prototyping ne
 The hardest part is always starting. Commit to two minutes. Momentum is real.
 
 **Example**
-"I'll just open the project and read where I left off." Ten minutes later, you're refactoring a system. You didn't plan to — but starting gave permission to continue.
+"I'll just open the project and read where I left off." Ten minutes later, you're deep in the work. You didn't plan to — but starting gave permission to continue.
 //BOUNDARY: If two minutes doesn't create momentum, the task may be wrong. Check: is it too big? Too vague? Too boring? Reframe before forcing.
 
 **Depth**
@@ -50,7 +50,7 @@ The hardest part is always starting. Commit to two minutes. Momentum is real.
 Hyperfocus is the superpower. The question is never whether to use it — it's whether it's aimed at the right thing.
 
 **Example**
-Hyperfocusing on core gameplay mechanics: productive. Hyperfocusing on pixel-perfect menu animations before the game is fun: seductive but wasteful.
+Hyperfocusing on core architecture: productive. Hyperfocusing on polishing a config file before the system works: seductive but wasteful.
 //BOUNDARY: Don't interrupt hyperfocus to evaluate it. Set direction BEFORE entering, not during.
 
 **Depth**
@@ -67,7 +67,7 @@ Hyperfocusing on core gameplay mechanics: productive. Hyperfocusing on pixel-per
 New ideas are not the enemy. Chasing them is. Capture, don't chase.
 
 **Example**
-Mid-session: "What if the game had a crafting system?" Write it in the ideas backlog. Don't open a new branch. Don't research crafting systems. Don't redesign the GDD. Write it down and return to the current task.
+Mid-session: "What if I restructured the whole deployment pipeline?" Write it in the ideas backlog. Don't open a new branch. Don't research alternatives. Don't redesign the architecture. Write it down and return to the current task.
 //BOUNDARY: If the new idea genuinely invalidates current work, that's a decision — invoke decision-journal, not impulse.
 
 **Depth**
@@ -85,11 +85,11 @@ Mid-session: "What if the game had a crafting system?" Write it in the ideas bac
 OCD says "it must be right." The project says "it must exist." Existing beats perfect every time.
 
 **Example**
-"I can't commit this code until I've handled every edge case." But the feature doesn't work at all yet. Handle the happy path first. Edge cases are future work.
+"I can't commit this until I've handled every edge case." But the core functionality doesn't work yet. Handle the happy path first. Edge cases are future work.
 //BOUNDARY: This doesn't mean ship garbage. It means match quality to stage. Prototype quality for prototypes. Polish for release.
 
 **Depth**
-- Perfectionism disguises itself as quality. The test: is this making the thing better for the player, or making you feel better about the code?
+- Perfectionism disguises itself as quality. The test: is this making the thing better for the user, or making you feel better about the code?
 - OCD re-checking is the most expensive form. Re-reading code you just wrote. Re-running tests that just passed. Re-researching a decision you just made. Each feels productive; none are.
 - The decision-journal exists precisely for this. "I already decided this. The revisit trigger hasn't been met." That sentence is worth its weight in gold.
 - Quality has diminishing returns. The jump from 0% to 80% is where the value lives. The jump from 80% to 95% costs 3x as much and the player may not notice.
@@ -103,7 +103,7 @@ OCD says "it must be right." The project says "it must exist." Existing beats pe
 Future-you will not remember where present-you left off. Leave breadcrumbs before you stop.
 
 **Example**
-End of session: "Working on player movement. Jump feels floaty — next session: increase gravity multiplier and test. The relevant file is player_controller.gd line 47."
+End of session: "Working on cert-sync CronJob. PEM reconstruction is wrong — next session: fix base64 decoding and test with real cert. The relevant file is cronjob.yaml line 47."
 //BOUNDARY: Breadcrumbs are 2-3 sentences, not a status report. If it takes more than 30 seconds to write, you're over-documenting.
 
 **Depth**
@@ -157,8 +157,9 @@ When you notice these patterns, gently intervene:
 
 - The `decision-journal` skill — Primary tool for breaking decision loops
 - The `sprint-manager` skill — Task sizing for ADHD attention patterns
+- The `inner-ally` skill — When it's emotional, not tactical
 - `references/session-patterns.md` — Practical patterns for structuring work sessions
 
 ---
 
-*Your brain has different fuel economics. Learn them, work with them, build the game.*
+*Your brain has different fuel economics. Learn them, work with them, build the thing.*
