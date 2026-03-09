@@ -34,6 +34,7 @@ Skills compose. One skill may tell you to invoke another.
 | `skill-builder` | Creating or improving Claude Code skills |
 | `domain-expert` | Brainstorming, checking availability, choosing registrars |
 | `config-packager` | Updating agentic-config repo, auditing for PII, packaging skills |
+| `research` | Gathering evidence for decisions, investigating unknowns, comparing approaches |
 | `red-team` | Testing code, services, or infrastructure for vulnerabilities |
 | `qa-engineer` | Building features, reviewing work, validating output, anything that feels "done" |
 
@@ -68,6 +69,7 @@ writing task → writing-documents → [document type guidance]
 code review → code-review → writing-documents (for findings)
 review feedback → review-responder → apply/skip each item
 new skill → skill-builder → writing-documents (skills are agent docs)
+research task → research → writing-documents (for synthesis report)
 security testing → red-team → review-responder (for remediation)
 building features → qa-engineer (wear the QA hat throughout)
 validating work → qa-engineer → verification checklist
@@ -84,6 +86,7 @@ validating work → qa-engineer → verification checklist
 | Writing docs | `writing-documents` |
 | Code review | `code-review` |
 | Making a big decision | `game-dev` → `decision-journal` |
+| Investigating / comparing / deciding | `research` |
 | Security testing | `red-team` |
 | Building / verifying work | `qa-engineer` |
 | Packaging config | `config-packager` |
