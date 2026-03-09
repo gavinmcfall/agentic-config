@@ -104,7 +104,7 @@ Pointers to relevant guidance — don't embed it, link it:
 - External dependencies with actionable links
 - Error handling policy
 
-**Make references actionable.** Not "ParquetSharp documentation" but "[ParquetSharp](https://github.com/G-Research/ParquetSharp) — `G-Research.ParquetSharp` NuGet package."
+**Make references actionable.** Not "LibFoo documentation" but "[LibFoo](https://github.com/example/libfoo) — `npm install libfoo`, see `createClient()` for setup."
 
 **Include error policy.** Either state it directly ("errors should not prevent operation from completing; log and continue") or link to where it's defined.
 

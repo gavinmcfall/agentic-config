@@ -35,7 +35,7 @@ SANITIZE_PATTERNS=(
   'yourhandle|your-handle|Personal handle'
   'YourSurname|YourSurname|Surname'
   'EMPLOYER_UPPER|YOUR_PROVIDER|Employer (uppercase)'
-  'EmployerCamel|YourPlatform|Employer (camelCase)'
+  'EmployerCamel|YourProvider|Employer (camelCase)'
   'Employer_Title|Your_Provider|Employer (titlecase)'
   'employer_lower|your_provider|Employer (lowercase)'
   'AWS_ACCESS_KEY_ID_EMPLOYER_BEDROCK|AWS_ACCESS_KEY_ID_BEDROCK|Employer env var'

@@ -97,29 +97,29 @@ erDiagram
         string name
     }
 
-    Merchant ||--o{ Transaction : processes
-    Merchant {
-        uuid merchant_id PK
+    Store ||--o{ Sale : processes
+    Store {
+        uuid store_id PK
         uuid campus_key FK
-        string account_number
+        string store_number
     }
 
-    CommunityMember ||--o{ Transaction : makes
-    CommunityMember {
-        uuid community_member_key PK
+    Customer ||--o{ Sale : makes
+    Customer {
+        uuid customer_id PK
         uuid organization_key FK
-        uuid identity_key FK
+        string email UK
     }
 
-    Transaction {
-        uuid transaction_id PK
-        uuid merchant_id FK
-        uuid community_member_key FK
+    Sale {
+        uuid sale_id PK
+        uuid store_id FK
+        uuid customer_id FK
         decimal amount
         datetime created_at
     }
 
-    %% MEANING: Giving platform core entities
+    %% MEANING: Multi-tenant retail platform core entities
     %% PATTERN: Organization owns all, scoped by org key
 ```
 

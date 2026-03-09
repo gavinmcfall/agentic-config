@@ -30,7 +30,6 @@ Skills compose. One skill may tell you to invoke another.
 | `writing-documents` | Writing any documentation, READMEs, designs, plans |
 | `code-review` | Reviewing PRs, commits, staged changes, auditing code |
 | `review-responder` | Processing and responding to code review feedback |
-| `research` | Gathering evidence for decisions, investigation tasks |
 | `mermaid-diagrams` | Creating diagrams in markdown documents |
 | `skill-builder` | Creating or improving Claude Code skills |
 | `domain-expert` | Brainstorming, checking availability, choosing registrars |
@@ -68,7 +67,6 @@ writing task → writing-documents → [document type guidance]
 code review → code-review → writing-documents (for findings)
 review feedback → review-responder → apply/skip each item
 new skill → skill-builder → writing-documents (skills are agent docs)
-research → research → writing-documents (for synthesis)
 security testing → red-team → review-responder (for remediation)
 ```
 

@@ -145,7 +145,7 @@ gantt
     section Release
     Documentation           :docs, after err, 7d
     Package validation      :crit, valid, after load, 3d
-    Publish to NuGet       :milestone, pub, after valid, 0d
+    Publish release        :milestone, pub, after valid, 0d
 
     %% MEANING: Full release timeline with dependencies
     %% MARKERS: 'crit' = critical path, 'milestone' = key event
