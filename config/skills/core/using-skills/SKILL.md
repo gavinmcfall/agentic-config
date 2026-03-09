@@ -35,6 +35,7 @@ Skills compose. One skill may tell you to invoke another.
 | `domain-expert` | Brainstorming, checking availability, choosing registrars |
 | `config-packager` | Updating agentic-config repo, auditing for PII, packaging skills |
 | `red-team` | Testing code, services, or infrastructure for vulnerabilities |
+| `qa-engineer` | Building features, reviewing work, validating output, anything that feels "done" |
 
 ### Game Dev → `game-dev`
 
@@ -68,6 +69,8 @@ code review → code-review → writing-documents (for findings)
 review feedback → review-responder → apply/skip each item
 new skill → skill-builder → writing-documents (skills are agent docs)
 security testing → red-team → review-responder (for remediation)
+building features → qa-engineer (wear the QA hat throughout)
+validating work → qa-engineer → verification checklist
 ```
 
 ## Quick "What Do I Invoke?"
@@ -82,6 +85,7 @@ security testing → red-team → review-responder (for remediation)
 | Code review | `code-review` |
 | Making a big decision | `game-dev` → `decision-journal` |
 | Security testing | `red-team` |
+| Building / verifying work | `qa-engineer` |
 | Packaging config | `config-packager` |
 | Domain names | `domain-expert` |
 | New skill | `skill-builder` |
