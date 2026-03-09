@@ -131,7 +131,7 @@ A design doc without flow analysis may miss cross-cutting concerns. A flow witho
 
 ## Exemplar
 
-See `exemplar.md` — email bounce handling from ISP rejection through suppression.
+*Exemplar coming soon — use the structure above as your guide.*
 
 ## Template
 

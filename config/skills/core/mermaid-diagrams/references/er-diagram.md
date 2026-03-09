@@ -83,44 +83,41 @@ erDiagram
 
 ```mermaid
 erDiagram
-    Organization ||--o{ Campus : contains
-    Organization {
-        uuid organization_key PK
-        string name
-        string handle UK
-    }
-
-    Campus ||--o{ Merchant : configures
-    Campus {
-        uuid campus_key PK
-        uuid organization_key FK
-        string name
-    }
-
-    Store ||--o{ Sale : processes
-    Store {
-        uuid store_id PK
-        uuid campus_key FK
-        string store_number
-    }
-
-    Customer ||--o{ Sale : makes
-    Customer {
-        uuid customer_id PK
-        uuid organization_key FK
+    User ||--o{ FleetEntry : owns
+    User {
+        uuid id PK
         string email UK
+        string name
+        string role
     }
 
-    Sale {
-        uuid sale_id PK
-        uuid store_id FK
-        uuid customer_id FK
-        decimal amount
-        datetime created_at
+    Vehicle ||--o{ FleetEntry : "listed in"
+    Vehicle {
+        integer id PK
+        string slug UK
+        string name
+        string focus
+        string size_label
+        integer cargo
     }
 
-    %% MEANING: Multi-tenant retail platform core entities
-    %% PATTERN: Organization owns all, scoped by org key
+    FleetEntry ||--o| InsuranceType : "covered by"
+    FleetEntry {
+        integer id PK
+        uuid user_id FK
+        integer vehicle_id FK
+        integer insurance_type_id FK
+        string custom_name
+        string visibility
+    }
+
+    InsuranceType {
+        integer id PK
+        string label
+    }
+
+    %% MEANING: Fleet management — users own ships with insurance
+    %% PATTERN: User scoped, vehicle is shared reference data
 ```
 
 ---

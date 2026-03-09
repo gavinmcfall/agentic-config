@@ -108,7 +108,7 @@ Capture why things work this way. The what becomes obvious once you understand w
 
 **Example**
 Good: "Multi-tenant security requires tenant filtering because one deployment serves all customers."
-Bad: "Add .Where(x => x.TenantId == tenantId) to queries."
+Bad: "Add `WHERE tenant_id = ?` to every query."
 
 **Depth**
 - Why teaches principles; what teaches steps

@@ -237,14 +237,6 @@ After drafting:
 
 ## Exemplar
 
-See `exemplar.md` — service catalog demonstrating:
-- Consistent entry structure (every service same fields)
-- Quick lookup table for common needs
-- Blast radius reference for decision support
-- Entry template for maintenance
-
-Also see in the wild:
-- `docs/guidance/newrelic/service-catalog.md` — full service catalog (enumerate pattern)
-- `docs/guidance/newrelic/metrics-catalog.md` — metrics discovery (teach discovery pattern)
+*Exemplar coming soon — use the structure above as your guide.*
 
 *Find the answer. Don't read the book.*

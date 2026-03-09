@@ -157,4 +157,4 @@ The design remains the canonical source for architectural intent—even as it ev
 
 ## Exemplar
 
-See `exemplar.md` — local semantic search tool design.
+*Exemplar coming soon — use the structure above as your guide.*

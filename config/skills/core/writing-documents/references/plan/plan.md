@@ -205,4 +205,4 @@ Once work is complete, delete the plan. The design and the code are the durable 
 
 ## Exemplar
 
-See `exemplar.md` — FileScanner component from semantic search design.
+*Exemplar coming soon — use the structure above as your guide.*

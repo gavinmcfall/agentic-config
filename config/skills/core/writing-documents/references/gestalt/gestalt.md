@@ -39,7 +39,7 @@ Read 50 service gestalts → understand the architecture. Know what each does, h
 Gestalt captures what makes this thing THIS thing, not everything about it.
 
 **Example**
-Identity service: "JWT authority for the platform. Event-sourced. Identity merging is irreversible. Everything depends on it."
+SC Bridge: "Star Citizen companion app. Cloudflare Worker + D1. Clean-slate import from browser extension. Every query scoped to authenticated user."
 //BOUNDARY: If you had to compress understanding to one paragraph, what survives?
 
 **Depth**
@@ -161,6 +161,6 @@ Don't duplicate what lives elsewhere. Point to it.
 
 ## Exemplar
 
-See `exemplar.md` — Identity service gestalt.
+See `exemplar.md` — SC Bridge companion app gestalt.
 
 *The essential essence, not everything. Understanding, not just facts.*

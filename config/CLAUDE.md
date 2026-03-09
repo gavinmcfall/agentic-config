@@ -68,10 +68,10 @@ Task tool with:
 ### Extended Context (200K-1M tokens)
 When tasks require **>200K context** (massive codebases, very long documents, extensive research), use **direct Bedrock API calls via Bash** instead of the Task tool.
 
-**AWS Bedrock Credentials (Your_Provider):**
-- Access Key: `$AWS_ACCESS_KEY_ID_YOUR_PROVIDER_BEDROCK`
-- Secret Key: `$AWS_SECRET_ACCESS_KEY_YOUR_PROVIDER_BEDROCK`
-- Region: `$AWS_REGION_YOUR_PROVIDER_BEDROCK` (us-west-2)
+**AWS Bedrock Credentials:**
+- Access Key: `$AWS_ACCESS_KEY_ID_BEDROCK`
+- Secret Key: `$AWS_SECRET_ACCESS_KEY_BEDROCK`
+- Region: `$AWS_REGION_BEDROCK` (default: us-west-2)
 - Model ID: `global.anthropic.claude-opus-4-6-v1` (1M context)
 
 **Template for Bedrock API calls:**
@@ -91,12 +91,12 @@ cat > /tmp/bedrock-large-context-request.json << 'EOF'
 EOF
 
 # 2. Call Bedrock API
-AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_YOUR_PROVIDER_BEDROCK \
-AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_YOUR_PROVIDER_BEDROCK \
-AWS_DEFAULT_REGION=us-west-2 \
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_BEDROCK \
+AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_BEDROCK \
+AWS_DEFAULT_REGION=${AWS_REGION_BEDROCK:-us-west-2} \
 aws bedrock-runtime invoke-model \
   --model-id global.anthropic.claude-opus-4-6-v1 \
-  --region us-west-2 \
+  --region ${AWS_REGION_BEDROCK:-us-west-2} \
   --cli-binary-format raw-in-base64-out \
   --body file:///tmp/bedrock-large-context-request.json \
   /tmp/bedrock-large-context-response.json
