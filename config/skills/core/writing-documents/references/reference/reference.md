@@ -237,6 +237,6 @@ After drafting:
 
 ## Exemplar
 
-*Exemplar coming soon — use the structure above as your guide.*
+See `exemplar.md` — Hybrid service catalog with CSVs for queryable data and markdown for guidance.
 
 *Find the answer. Don't read the book.*

@@ -131,7 +131,7 @@ A design doc without flow analysis may miss cross-cutting concerns. A flow witho
 
 ## Exemplar
 
-*Exemplar coming soon — use the structure above as your guide.*
+See `exemplar.md` — Task assignment notification flow across multiple delivery channels.
 
 ## Template
 

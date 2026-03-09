@@ -39,7 +39,7 @@ Read 50 service gestalts → understand the architecture. Know what each does, h
 Gestalt captures what makes this thing THIS thing, not everything about it.
 
 **Example**
-SC Bridge: "Star Citizen companion app. Cloudflare Worker + D1. Clean-slate import from browser extension. Every query scoped to authenticated user."
+TaskFlow: "Team task management app. Node.js + PostgreSQL. Redis for real-time via WebSocket. Every query scoped to project membership."
 //BOUNDARY: If you had to compress understanding to one paragraph, what survives?
 
 **Depth**
@@ -161,6 +161,6 @@ Don't duplicate what lives elsewhere. Point to it.
 
 ## Exemplar
 
-See `exemplar.md` — SC Bridge companion app gestalt.
+See `exemplar.md` — TaskFlow team task management app gestalt.
 
 *The essential essence, not everything. Understanding, not just facts.*

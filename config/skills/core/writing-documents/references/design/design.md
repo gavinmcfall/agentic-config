@@ -157,4 +157,4 @@ The design remains the canonical source for architectural intent—even as it ev
 
 ## Exemplar
 
-*Exemplar coming soon — use the structure above as your guide.*
+See `exemplar.md` — TaskFlow notification system design with contracts, schema, and trade-offs.

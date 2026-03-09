@@ -1,114 +1,96 @@
-# SC Bridge — Gestalt
+# TaskFlow — Gestalt
 
-**What it is**: A Star Citizen companion web app that tracks ships, fleet composition, insurance, loot data, and trade commodities.
+**What it is**: A team task management web app. Users create projects, assign tasks, track progress, and get notified when things change.
 
-**Why it exists**: The game has no built-in fleet management. Players with 50+ ships need to see what they own, find coverage gaps, and make informed purchasing decisions.
+**Why it exists**: Teams need a shared view of who's doing what. Spreadsheets lose structure. Chat loses history. TaskFlow gives tasks a home with accountability and visibility.
 
-**Where it fits**: Standalone web app. Pulls game data from RSI's public API and community data sources. Users import their hangar via browser extension.
+**Where it fits**: Standalone web app. PostgreSQL for persistence, Redis for real-time updates, S3 for file attachments. Deployed as containers behind a load balancer.
 
 ---
 
 ## How It Fits
 
 ```
-RSI Public API / DataCore
-        ↓ game data sync
-SC Bridge Backend (Cloudflare Worker + D1)
-        ↓ JSON API
-React SPA Frontend
-        ↓ renders
-Player's browser
+Browser / Mobile App
+        ↓ REST + WebSocket
+API Gateway (rate limiting, auth)
+        ↓
+Application Server (Node.js)
+        ↓ queries / writes
+PostgreSQL          Redis (pub/sub, cache)
+        ↓
+S3 (attachments)
 ```
 
-### Capsule: SingleDeploymentUnit
+### Capsule: SingleSourceOfTruth
 
 **Invariant**
-Backend and frontend deploy as one unit — a Cloudflare Worker serving the API and static assets from the same domain.
+PostgreSQL is the source of truth for all task state. Redis is a cache and pub/sub layer — losing Redis means degraded real-time updates, not data loss.
 
 **Example**
-Push to `main` → GitHub Actions → `wrangler deploy` → live in ~30 seconds. No separate frontend deployment, no CDN invalidation, no orchestration.
-//BOUNDARY: This simplicity breaks if the app needs WebSocket connections or long-running processes.
+Task status change: write to PostgreSQL first, then publish to Redis for WebSocket broadcast. If Redis is down, the change persists — clients refresh to see it.
+//BOUNDARY: If we needed guaranteed delivery of notifications, we'd need a proper message queue, not Redis pub/sub.
 
 **Depth**
-- D1 (SQLite) for persistence — 72 migrations, single database
-- R2 for image storage (ship renders, paint variants)
-- KV for caching (game version data)
-- No external databases, no Redis, no queues
+- PostgreSQL: all task, project, user, and comment data
+- Redis: WebSocket presence, notification fan-out, query cache
+- S3: file attachments, referenced by URL in task records
+- No event sourcing — current state model with audit log table
 
 ---
 
 ## Key Concepts
 
-### The Import Model
+### The Permission Model
 
-Users don't manually add ships. They install HangarXplor (browser extension), which extracts hangar data from RSI's website, then paste the JSON into SC Bridge.
+Every project has an owner and members with roles: `admin`, `member`, `viewer`. Permissions cascade — project-level roles grant access to all tasks within.
 
-Import is **clean-slate**: every import deletes all existing fleet entries and re-creates from the import data. This is intentional — the browser extension is the source of truth, not SC Bridge.
+There is no global admin who can see all projects. The system is multi-tenant by isolation, not by flag.
 
-### Capsule: UserIsolation
+### Capsule: TaskLifecycle
 
 **Invariant**
-Every data query is scoped to the authenticated user. There is no admin override for viewing another user's fleet.
+Tasks move through a defined lifecycle. Backwards transitions are allowed but logged.
 
 **Example**
-`GET /api/vehicles` always filters by `user_id` from the session. Even if you know another user's fleet entry ID, the query won't return it.
-//BOUNDARY: Public fleet sharing (org visibility) is opt-in per user, not a default.
+`open → in_progress → review → done`. Moving from `done` back to `in_progress` is valid (rework) but creates an audit entry explaining why.
+//BOUNDARY: Deleted tasks are soft-deleted (archived). Hard deletion only via data retention policy.
 
 **Depth**
-- Better Auth handles sessions (JWT + cookie)
-- Every route that touches user data extracts `userId` from the session
-- RBAC: `user`, `super_admin`, plus status flags (`banned`, `deleted`)
-- Fleet visibility: `private | public | org | officers`
+- Status transitions validated server-side — the UI can show any button, but the API rejects invalid moves
+- Custom statuses per project (beyond the defaults) stored in `project_settings`
+- Audit log captures: who, what, when, previous value, new value
 
-### The Game Data Layer
+### The Notification Model
 
-Game reference data (ships, components, trade commodities, shops, loot items) is separate from user data. It syncs from external sources and is shared across all users.
+Notifications are fire-and-forget. Users are notified of changes to tasks they own, are assigned to, or are watching. Delivery channels: in-app, email (digest), webhook.
 
-User data (fleet entries, collections, wishlists, settings) references game data via foreign keys but never modifies it.
+Missing a notification is acceptable. Missing a data write is not. This priority shapes the architecture — notifications are eventual, writes are synchronous.
 
 ---
 
 ## Constraints
 
-- **D1 is SQLite** — no concurrent writes, no stored procedures, limited to 10MB per query result. Design queries to be simple.
-- **Worker CPU limits** — 30 seconds wall time per request. Sync operations must be chunked.
-- **Clean-slate import** — cannot merge imports. If the extension misses a ship, SC Bridge loses it too.
-- **No real-time** — no WebSockets. Polling or manual refresh only.
-- **Auth via Better Auth** — session management is a dependency. Breaking changes in Better Auth require careful migration.
+- **PostgreSQL row-level locking** — concurrent edits to the same task serialize at the database. No optimistic concurrency in the app layer.
+- **WebSocket scaling** — each app server holds its own connections. Redis pub/sub broadcasts across servers. Adding servers adds WebSocket capacity linearly.
+- **File size limits** — S3 accepts anything, but the API enforces 25MB per attachment. Clients upload directly to S3 via presigned URL.
+- **No offline mode** — the app assumes connectivity. Offline support would require conflict resolution we haven't designed.
 
 ---
 
 ## What It Does NOT Do
 
-- Track in-game currency or aUEC balances (volatile, no API)
-- Provide real-time game state (no live connection to game servers)
-- Store RSI credentials (auth is via Discord/GitHub OAuth, not RSI login)
-- Manage org membership (reads org data, doesn't write it)
+- Gantt charts or timeline views (tasks have due dates, not duration)
+- Time tracking (no built-in timers or hour logging)
+- Invoicing or billing (it's a task tool, not a business tool)
+- Chat or messaging (comments on tasks, not conversations)
 
 ---
 
 ## Deeper
 
-- Database conventions — `src/db/CONVENTIONS.md`
-- Route structure — `src/routes/` (one file per domain)
-- Auth setup — `src/lib/auth.ts` (Better Auth factory with Kysely D1)
-- Test infrastructure — `.claude/test-infrastructure-summary.md`
-
----
-
-## Why This Works as Gestalt
-
-**Essential essence in first paragraph**: Companion app, fleet tracking, game data.
-
-**Key concepts unlock understanding**:
-- Import model (clean-slate, extension is source of truth)
-- User isolation (every query scoped, no admin override)
-- Game data vs user data separation
-
-**Constraints shape decisions**: D1 limits, Worker CPU limits, clean-slate import.
-
-**What it does NOT do**: Prevents scope confusion with adjacent features.
-
-**Pointers to depth**: Links to code, conventions, test infrastructure.
-
-**After reading**: You understand what SC Bridge is, how data flows through it, what the architectural constraints are, and where new features would fit. You could reason about whether a change affects user data or game data, predict the blast radius of a schema change, and explain the system to someone else.
+- Database schema — `docs/schema.md`
+- API routes — `src/routes/` (one file per resource)
+- Auth setup — `src/lib/auth.ts` (session-based with JWT refresh)
+- WebSocket protocol — `docs/websocket.md`
+- Deployment — `docs/deployment.md` (Docker Compose for dev, k8s for production)

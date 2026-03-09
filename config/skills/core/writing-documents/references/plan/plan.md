@@ -205,4 +205,4 @@ Once work is complete, delete the plan. The design and the code are the durable 
 
 ## Exemplar
 
-*Exemplar coming soon — use the structure above as your guide.*
+See `exemplar.md` — Notification dispatcher component plan with done criteria and error policy.

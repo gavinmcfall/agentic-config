@@ -83,7 +83,7 @@ erDiagram
 
 ```mermaid
 erDiagram
-    User ||--o{ FleetEntry : owns
+    User ||--o{ Project : owns
     User {
         uuid id PK
         string email UK
@@ -91,33 +91,34 @@ erDiagram
         string role
     }
 
-    Vehicle ||--o{ FleetEntry : "listed in"
-    Vehicle {
-        integer id PK
-        string slug UK
+    Project ||--o{ Task : contains
+    Project {
+        uuid id PK
         string name
-        string focus
-        string size_label
-        integer cargo
+        string description
+        string status
     }
 
-    FleetEntry ||--o| InsuranceType : "covered by"
-    FleetEntry {
-        integer id PK
-        uuid user_id FK
-        integer vehicle_id FK
-        integer insurance_type_id FK
-        string custom_name
-        string visibility
+    Task }o--o| User : "assigned to"
+    Task {
+        uuid id PK
+        uuid project_id FK
+        uuid assignee_id FK
+        string title
+        string status
+        timestamp due_date
     }
 
-    InsuranceType {
-        integer id PK
-        string label
+    Task ||--o{ Comment : has
+    Comment {
+        uuid id PK
+        uuid task_id FK
+        uuid author_id FK
+        text body
     }
 
-    %% MEANING: Fleet management — users own ships with insurance
-    %% PATTERN: User scoped, vehicle is shared reference data
+    %% MEANING: Task management — users own projects containing tasks
+    %% PATTERN: Project scoped, tasks assigned to users
 ```
 
 ---
