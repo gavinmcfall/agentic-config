@@ -16,6 +16,8 @@
 | `domain-expert` | Domain name evaluation | Brainstorming, checking availability, choosing registrars |
 | `config-packager` | Package config for distribution | Updating agentic-config repo, auditing for PII, packaging skills |
 | `red-team` | Adversarial security testing | Testing code, services, or infrastructure for vulnerabilities |
+| `qa-engineer` | QA thinking and verification | Building features, reviewing work, validating anything that feels "done" |
+| `human-profile` | Psychological profile builder | Building personality profiles through interviews or document ingestion |
 
 ## Grouped Skills
 
@@ -77,6 +79,9 @@ release planning → steam-publisher → playtest-coordinator (Next Fest)
 code review → code-review → writing-documents (for findings)
 review feedback → review-responder → apply/skip each item
 security testing → red-team → review-responder (for remediation)
+building features → qa-engineer (QA thinking throughout, not just at the end)
+verifying work → qa-engineer → verification checklist
+personality profiling → human-profile → (interview or document ingestion mode)
 ```
 
 ### System Building
@@ -105,3 +110,5 @@ automation need → n8n-workflow-builder
 **Automate something?** `infrastructure` → `n8n-workflow-builder`
 **Package config for sharing?** `config-packager`
 **Security testing?** `red-team`
+**Building / verifying work?** `qa-engineer`
+**Personality profiling?** `human-profile`

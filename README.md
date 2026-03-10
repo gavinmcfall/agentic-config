@@ -35,7 +35,7 @@ The installer will:
 
 ## What's Included
 
-**26 skills** across 4 tiers, **3 hooks**, **2 rule files**, and a pre-configured settings template.
+**27 skills** across 4 tiers, **3 hooks**, **2 rule files**, and a pre-configured settings template.
 
 ### Hooks
 
@@ -65,7 +65,7 @@ The `settings.template.json` provides:
 
 ## Skills
 
-### Core (8 skills) — Always installed
+### Core (9 skills) — Always installed
 
 These are universally useful regardless of what you're building.
 
@@ -73,6 +73,7 @@ These are universally useful regardless of what you're building.
 |-------|-------------|
 | `code-review` | Review code with fresh eyes for correctness, security, and maintainability. Generate standalone prompts for Claude, G... |
 | `domain-expert` | Find, evaluate, and recommend domain names. Use when brainstorming domains, checking availability, evaluating names f... |
+| `human-profile` | Build comprehensive psychological profiles through structured interviews or document ingestion. Creates AI-actionable ... |
 | `mermaid-diagrams` | Effective Mermaid diagrams. Use when creating markdown documents with human audiences. |
 | `research` | Evidence-first research mode with mandatory citations. Invoke at the START of research, not when writing up results. |
 | `review-responder` | Process and respond to code review feedback. Use after receiving PR comments from GitHub, feedback from disconnected-... |
