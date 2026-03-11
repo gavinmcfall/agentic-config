@@ -20,32 +20,46 @@ These rules apply to ALL repositories and conversations.
 14. **Stop Looping, Start Asking** — If you hit the same error 3 times, stop and ask for guidance instead of burning tokens on retry loops.
 15. **Know the Time** - Check the current time using the time MCP server before starting any task or responding to a new message. Use NZ timezone (Pacific/Auckland) as the default.
 16. **Commit Before Each Change** — Before starting a new feature or change, commit current staged/unstaged changes with semantic commit messages (feat:, fix:, chore:, refactor:, docs:, style:, test:). Keeps git history clean and makes work trackable across compactions.
-17. **Maintain the Session Journal** — After completing significant work, update `.claude/session-journal.md` with current focus, changes made, decisions, and context that must survive compaction.
+17. **Maintain the Session Journal** — Update `.claude/session-journal.md` when: a plan is approved, work kicks off, work completes, a key decision is made, or before compaction. This is a living journal, not a snapshot.
 18. **Use CLOUDFLARE_API_TOKEN** — Always use `CLOUDFLARE_API_TOKEN` for Cloudflare/Wrangler operations. `CF_API_TOKEN` does NOT exist in this environment — never reference it, never check for it, never fall back to it. Before running ANY wrangler command, run `source ~/.secrets` to load `CLOUDFLARE_API_TOKEN` into the shell. This applies to all wrangler commands, API calls, and environment variable references.
 
 ## Session Journal
 
-The file `.claude/session-journal.md` persists across compactions. Hooks handle timestamps and trimming automatically — your job is to keep the content sections useful.
+The file `.claude/session-journal.md` is a **living journal** — like a human's notebook. It persists across compactions and captures the history of what happened, what was decided, and why.
 
-### When to Update
-- After completing a significant task (commit, deployment, investigation)
-- After making a key decision worth remembering
-- When you've accumulated context a fresh Claude would need
+### Structure
 
-### What to Write
+The journal has two parts:
 
-| Section | Content | Example |
-|---------|---------|---------|
-| **Current Focus** | What's actively being worked on | "Debugging wings-cert-sync SSH key format" |
-| **Recent Changes** | Files changed, features added, bugs fixed | "- Fixed PEM reconstruction in wings-cert-sync CronJob" |
-| **Key Decisions** | Choices made and why | "- Using 1Password CLI instead of ExternalSecrets for Wings certs (Pelican needs SSH format)" |
-| **Important Context** | Anything a fresh Claude needs to continue | "- PR #42 is open, waiting on CI" |
+1. **Current State** — Overwritten each update. What's active RIGHT NOW (focus + blockers).
+2. **Log** — Chronological entries, newest at top. Never overwrite — only append new entries and let the hook trim old ones from the bottom.
 
-### How to Update
-- **Replace** section content — don't append endlessly
-- Keep each section to **3-5 bullet points max**
-- Remove stale items that are no longer relevant
-- The journal is a snapshot of NOW, not a history log
+### When to Write an Entry
+
+Write a log entry when ANY of these happen:
+- A plan is approved or a direction is chosen
+- Work kicks off on a new task or scope
+- A piece of work is completed (commit, deployment, investigation)
+- A key decision is made (and WHY)
+- Before compaction (capture anything not yet journaled)
+
+### Entry Format
+
+```markdown
+### YYYY-MM-DD HH:MM — Event type: brief title
+- What happened and why
+- Key details a future Claude needs
+- Files changed, decisions made, blockers hit
+```
+
+**Event types:** `Plan`, `Started`, `Completed`, `Decision`, `Blocked`, `Context`
+
+### Rules
+- Always update **Current State** when writing an entry
+- Entries are append-only (newest first under `## Log`)
+- Keep entries concise — 2-5 bullets each
+- Include the WHY, not just the what
+- The hook trims old entries automatically — don't worry about length
 
 ## Subagent Model Selection
 

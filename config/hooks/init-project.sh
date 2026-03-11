@@ -3,36 +3,25 @@
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-.}"
 CLAUDE_DIR="$PROJECT_DIR/.claude"
 
-# Note: We don't create .mcp.json anymore
-# An empty mcpServers object is invalid per Claude Code schema
-# Only create .mcp.json when you actually need project-specific MCP servers
-
 # Create .claude directory if it doesn't exist
 if [ ! -d "$CLAUDE_DIR" ]; then
     mkdir -p "$CLAUDE_DIR"
-    echo "📁 Created .claude directory"
 fi
 
-# Create empty session journal if it doesn't exist
+# Create session journal if it doesn't exist — single source of truth for the template
 if [ ! -f "$CLAUDE_DIR/session-journal.md" ]; then
     cat > "$CLAUDE_DIR/session-journal.md" << 'EOF'
 # Session Journal
 
-This file maintains running context across compactions.
+A living journal that persists across compactions. Captures decisions, progress, and context.
 
-## Current Focus
+## Current State
+- **Focus:** (what's being worked on right now)
+- **Blocked:** (anything blocking progress, or "nothing")
 
-
-## Recent Changes
-
-
-## Key Decisions
-
-
-## Important Context
-
+## Log
+<!-- Newest entries at top. Format: ### YYYY-MM-DD HH:MM — Event type: brief description -->
 EOF
-    echo "📝 Initialized session journal"
 fi
 
 exit 0

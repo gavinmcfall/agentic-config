@@ -1,41 +1,33 @@
 #!/bin/bash
+# Session journal maintenance — runs on PreCompact
+# Does NOT append markers. Just trims if the journal is too long.
+# Claude is responsible for writing meaningful entries (per CLAUDE.md).
 
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-.}"
 JOURNAL="$PROJECT_DIR/.claude/session-journal.md"
-TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-# Initialize journal if it doesn't exist
-if [ ! -f "$JOURNAL" ]; then
-    mkdir -p "$(dirname "$JOURNAL")"
-    cat > "$JOURNAL" << 'EOF'
-# Session Journal
+# Nothing to do if journal doesn't exist
+[ -f "$JOURNAL" ] || exit 0
 
-This file maintains running context across compactions.
+# Trim strategy: keep the header (everything up to and including "## Log")
+# plus the newest entries. Oldest entries at the bottom get dropped.
+TOTAL=$(wc -l < "$JOURNAL")
+MAX_LINES=300
 
-## Current Focus
-
-
-## Recent Changes
-
-
-## Key Decisions
-
-
-## Important Context
-
-EOF
-fi
-
-# Append session marker
-echo "" >> "$JOURNAL"
-echo "---" >> "$JOURNAL"
-echo "**Session compacted at:** $TIMESTAMP" >> "$JOURNAL"
-echo "" >> "$JOURNAL"
-
-# Keep journal under 500 lines (trim oldest entries if needed)
-if [ $(wc -l < "$JOURNAL") -gt 500 ]; then
-    tail -n 400 "$JOURNAL" > "$JOURNAL.tmp"
-    mv "$JOURNAL.tmp" "$JOURNAL"
+if [ "$TOTAL" -gt "$MAX_LINES" ]; then
+    # Find the "## Log" line — entries below it are chronological (newest first)
+    LOG_LINE=$(grep -n '^## Log' "$JOURNAL" | head -1 | cut -d: -f1)
+    if [ -n "$LOG_LINE" ]; then
+        HEADER_LINES=$((LOG_LINE + 1))
+        # Keep header + first N entries after it (newest are at top)
+        KEEP_ENTRIES=$((MAX_LINES - HEADER_LINES))
+        { head -n "$HEADER_LINES" "$JOURNAL"; head -n "$((HEADER_LINES + KEEP_ENTRIES))" "$JOURNAL" | tail -n "$KEEP_ENTRIES"; } > "$JOURNAL.tmp"
+        mv "$JOURNAL.tmp" "$JOURNAL"
+    else
+        # Fallback: no ## Log section found, keep first 300 lines
+        head -n "$MAX_LINES" "$JOURNAL" > "$JOURNAL.tmp"
+        mv "$JOURNAL.tmp" "$JOURNAL"
+    fi
 fi
 
 exit 0
