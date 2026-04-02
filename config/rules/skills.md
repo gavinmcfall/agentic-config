@@ -8,7 +8,8 @@
 |-------|---------|-------------|
 | `using-skills` | Check available skills | Start of any task |
 | `writing-documents` | Documentation guidance | Writing READMEs, guides, designs, plans, runbooks |
-| `code-review` | Fresh-eyes code review | Reviewing PRs, commits, staged changes, auditing code |
+| `outcome-driven-agentic-design` | Declare intent before code | New features, redesigns, significant changes needing a declaration of intent |
+| `code-review` | Fresh-eyes code review + multi-model prompts | Reviewing PRs, commits, staged changes. Generates Claude/Gemini/Codex prompts |
 | `review-responder` | Process review feedback | After receiving PR comments or code review findings |
 | `research` | Evidence-first investigation | Gathering information for decisions |
 | `mermaid-diagrams` | Effective diagrams | Creating diagrams in markdown documents |
@@ -16,7 +17,7 @@
 | `domain-expert` | Domain name evaluation | Brainstorming, checking availability, choosing registrars |
 | `config-packager` | Package config for distribution | Updating agentic-config repo, auditing for PII, packaging skills |
 | `red-team` | Adversarial security testing | Testing code, services, or infrastructure for vulnerabilities |
-| `qa-engineer` | QA thinking and verification | Building features, reviewing work, validating anything that feels "done" |
+| `qa-engineer` | QA thinking + multi-model verification | Building features, reviewing work, validating output. Generates Codex/Gemini QA prompts |
 | `human-profile` | Psychological profile builder | Building personality profiles through interviews or document ingestion |
 
 ## Grouped Skills
@@ -74,13 +75,26 @@ design question → gdd-writer ↔ prototype-coach (validate via prototype)
 release planning → steam-publisher → playtest-coordinator (Next Fest)
 ```
 
+### Design & Build
+```
+new feature → outcome-driven-agentic-design → writing-documents (for each layer)
+                                             → research (for findings layer)
+                                             → code-review (verify implementation)
+                                             → qa-engineer (verify truth statements)
+redesign → outcome-driven-agentic-design (start with findings to establish current truth)
+simple fix → outcome-driven-agentic-design (abbreviated: findings + plans only)
+```
+
 ### Code & Review
 ```
 code review → code-review → writing-documents (for findings)
+                           → generates Claude/Gemini/Codex prompts in .codereview/
 review feedback → review-responder → apply/skip each item
 security testing → red-team → review-responder (for remediation)
 building features → qa-engineer (QA thinking throughout, not just at the end)
 verifying work → qa-engineer → verification checklist
+                              → generates Codex/Gemini QA prompts in .codereview/
+multi-model review → code-review + qa-engineer (code quality + user workflows)
 personality profiling → human-profile → (interview or document ingestion mode)
 ```
 
@@ -95,6 +109,10 @@ automation need → n8n-workflow-builder
 
 ## When to Invoke What
 
+**New feature or significant change?** `outcome-driven-agentic-design`
+**Redesigning something that exists?** `outcome-driven-agentic-design` (findings first)
+**Want external models to review code?** `code-review` (generates Claude/Gemini/Codex prompts)
+**Want external models to verify QA?** `qa-engineer` (generates Codex/Gemini QA prompts)
 **Starting game dev work?** `game-dev`
 **Can't start / stuck?** `wellbeing` → `adhd-coach`
 **Emotionally overwhelmed?** `wellbeing` → `inner-ally`

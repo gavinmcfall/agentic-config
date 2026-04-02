@@ -211,6 +211,38 @@ Apply this skill generically. If you discover project-specific patterns while wo
 
 ---
 
+## Multi-Model QA Prompts
+
+After completing your QA analysis, generate standalone prompts for external models to provide independent verification. This is the QA equivalent of code-review's multi-model approach — fresh eyes from different AI models catch different things.
+
+### When to Generate
+
+| Situation | Generate Prompts? |
+|-----------|------------------|
+| Feature verification with requirements | Yes — requirements coverage is structured and benefits from multiple perspectives |
+| Data integrity concerns | Yes — different models catch different relationship/cascade issues |
+| Exploratory testing notes | No — exploratory testing is sapient, not mechanical |
+| Simple validation ("does it build?") | No — overkill |
+
+### How to Generate
+
+1. Read the prompt template from `references/prompts/codex.md` or `references/prompts/gemini.md`
+2. Fill placeholders with the code under test, requirements, and feature description
+3. Write filled prompts to `.codereview/` using the naming convention:
+   ```
+   .codereview/YYYY-MM-DD_HH-MM-SS_{repo-name}_{model}_QA.md
+   ```
+4. Ensure `.codereview/` exists and is in `.gitignore`
+
+### Available Templates
+
+- **Codex** → `references/prompts/codex.md` — JSON structured output, pass/fail per requirement, priority levels
+- **Gemini** → `references/prompts/gemini.md` — Direct style, role-anchored, explicit verdicts
+
+These complement the code-review prompts (which focus on code quality). QA prompts focus on **does it work for the user** — requirements coverage, workflow integrity, data integrity, and edge cases.
+
+---
+
 ## Deeper
 
 - `references/exploratory-testing.md` — How to test when there's no script
@@ -219,6 +251,8 @@ Apply this skill generically. If you discover project-specific patterns while wo
 - `references/personas-and-scenarios.md` — Thinking through user perspectives
 - `references/ai-qa-patterns.md` — QA patterns specific to AI-assisted development
 - `references/qa-audit-methodology.md` — Structured 5-phase audits for existing systems
+- `references/prompts/codex.md` — Codex QA verification prompt template
+- `references/prompts/gemini.md` — Gemini QA verification prompt template
 
 ---
 
